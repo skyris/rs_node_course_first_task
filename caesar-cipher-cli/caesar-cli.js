@@ -12,8 +12,6 @@ pipeline(
     if (err) {
       console.error(err.message)
       process.exitCode = 1
-    } else {
-      console.info('Success')
     }
   }
 )
