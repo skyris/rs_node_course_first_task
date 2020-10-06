@@ -1,10 +1,13 @@
 const fs = require('fs')
-const path = require('path')
 
 function writeToFileOrStdout(outputFile) {
   if (outputFile) {
-    outputFile = path.resolve(__dirname, outputFile)
-    return fs.createWriteStream(outputFile, {flags: 'a'})
+    if (fs.existsSync(outputFile)) {
+      return fs.createWriteStream(outputFile, {flags: 'a'})
+    } else {
+      console.error(`Output file ${outputFile} does not exist!`)
+      process.exit(1)
+    }
   } 
   return process.stdout
 }
